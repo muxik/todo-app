@@ -1,6 +1,11 @@
 <template>
   <div class="todo-list">
-    <TodoListItem v-for="n in 3" :key="n" />
+    <todo-list-item
+      v-for="todo in todos"
+      :key="todo.id"
+      @change-state="todo.completed = $event.target.checked"
+      :todo-item="todo"
+    />
   </div>
 </template>
 
@@ -8,9 +13,8 @@
 import TodoListItem from "./TodoListItem";
 export default {
   name: "TodoList",
-  components: {
-    TodoListItem,
-  },
+  components: { TodoListItem },
+  props: ["todos"],
 };
 </script>
 

@@ -2,17 +2,23 @@
   <main>
     <div class="container">
       <h1>欢迎使用MyTodo待办事项</h1>
-      <TodoAdd />
-      <TodoFilter />
-      <TodoList />
+      <todo-add  :tid="todos.length" @add-todo="addTodo"/>
+      <todo-filter 
+        :selected="filter"
+        @change-filter="filter = $event"/>
+      <todo-list :todos="filteredTodos"/>
     </div>
   </main>
 </template>
 
 <script>
+
 import TodoAdd from "./components/TodoAdd";
 import TodoFilter from "./components/TodoFilter";
 import TodoList from "./components/TodoList";
+
+import useTodos from "./composables/useTodos.js"
+import useFilteredTodos from "./composables/useFilteredTodos.js"
 export default {
   name: "App",
   components: {
@@ -20,6 +26,18 @@ export default {
     TodoFilter,
     TodoList,
   },
+  setup() {
+
+    const { todos, addTodo } = useTodos()
+    const { filter, filteredTodos } = useFilteredTodos(todos)
+    
+    return {
+      todos,
+      addTodo,
+      filter,
+      filteredTodos
+    }
+  }
 };
 </script>
 
