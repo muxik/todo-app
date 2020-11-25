@@ -27,7 +27,6 @@ export default {
     TodoList,
   },
   setup() {
-
     const { todos, addTodo } = useTodos()
     const { filter, filteredTodos } = useFilteredTodos(todos)
     

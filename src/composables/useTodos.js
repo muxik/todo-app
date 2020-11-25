@@ -1,28 +1,28 @@
 import { onMounted,ref } from "vue";
 
 export default function useTodos() {
-    const todos = ref([]);
-    const addTodo = (todo) => todos.value.push(todo)
+  const todos = ref([]);
+  const addTodo = (todo) => todos.value.push(todo)
 
-    const fetchTodos = async() =>{
-        const response = await fetch(
-            "http://jsonplaceholder.typicode.com/todos?_limit=5"
-        );
+  const fetchTodos = async() =>{
+    const response = await fetch(
+      "http://jsonplaceholder.typicode.com/todos?_limit=5"
+    );
 
-        const rawTodos = await response.json();
-        todos.value = rawTodos.map(todo => ({
-            id: todo.id,
-            content:todo.title,
-            completed: todo.completed
-        }))
-    }
-    
-    onMounted(() => {
-        fetchTodos();
-    })
+    const rawTodos = await response.json();
+    todos.value = rawTodos.map(todo => ({
+      id: todo.id,
+      content:todo.title,
+      completed: todo.completed
+    }))
+  }
 
-    return {
-        todos,
-        addTodo
-    };
+  onMounted(() => {
+    fetchTodos();
+  })
+
+  return {
+    todos,
+    addTodo
+  };
 }
