@@ -1,21 +1,17 @@
 <template>
-  <todo-page></todo-page>
+  <router-view></router-view>
 </template>
 
 <script>
-
-import TodoPage from "@/components/TodoPage";
 export default {
-  name: "App",
-  components :{
-    TodoPage
-  }
-};
+  name: 'app',
+  components: {}
+}
 </script>
 
 <style>
 * {
-  padding: 0;
-  margin: 0;
+  padding:0;
+  margin:0;
 }
 </style>

@@ -12,13 +12,14 @@
 </template>
 
 <script>
-import TodoAdd from "./todo/TodoAdd";
-import TodoFilter from "./todo/TodoFilter";
-import TodoList from "./todo/TodoList";
+import TodoAdd from "../components/todo/TodoAdd";
+import TodoFilter from "../components/todo/TodoFilter";
+import TodoList from "../components/todo/TodoList";
 
 
 import useTodos from "@/composables/todo/useTodos";
 import useFilteredTodos from "@/composables/todo/useFilteredTodos";
+import Axios from "axios";
 
 export default {
   name: "TodoPage",
@@ -26,6 +27,15 @@ export default {
     TodoAdd,
     TodoFilter,
     TodoList,
+  },
+  methods: {
+    async isLogin() {
+      let {data:res} = await Axios.post('/api/user/checkLogin', {token: window.sessionStorage.getItem('token')})
+      if (res.code === 0) await this.$router.push('login')
+    }
+  },
+  created() {
+    this.isLogin()
   },
   setup() {
     const {todos, addTodo} = useTodos()

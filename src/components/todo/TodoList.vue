@@ -3,7 +3,7 @@
     <todo-list-item
       v-for="todo in todos"
       :key="todo.id"
-      @change-state="todo.completed = $event.target.checked"
+      @change-state="changeState(todo, $event)"
       :todo-item="todo"
     />
   </div>
@@ -11,10 +11,22 @@
 
 <script>
 import TodoListItem from "./TodoListItem";
+import Axios from "axios"
 export default {
   name: "TodoList",
   components: { TodoListItem },
   props: ["todos"],
+  methods:{
+    changeState(todo, $event){
+      Axios
+        .post("/api/todo/update", {
+          id: todo.id,
+          completed: todo.completed,
+          token: window.sessionStorage.getItem("token")
+        })
+      todo.completed = $event.target.checked
+    }
+  }
 };
 </script>
 
