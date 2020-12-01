@@ -28,15 +28,6 @@ export default {
     TodoFilter,
     TodoList,
   },
-  methods: {
-    async isLogin() {
-      let {data:res} = await Axios.post('/api/user/checkLogin', {token: window.sessionStorage.getItem('token')})
-      if (res.code === 0) await this.$router.push('login')
-    }
-  },
-  created() {
-    this.isLogin()
-  },
   setup() {
     const {todos, addTodo} = useTodos()
     const {filter, filteredTodos} = useFilteredTodos(todos)

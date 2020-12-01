@@ -1,6 +1,5 @@
 <template>
   <div class="input-add">
-
     <input
       type="text"
       name="todo"

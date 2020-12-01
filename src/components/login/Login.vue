@@ -9,6 +9,9 @@
   </div>
   <LoginButton @click="login"></LoginButton>
 
+  {{user.username}}
+  {{user.password}}
+
 </template>
 
 <script>
@@ -20,6 +23,7 @@ export default {
   components: {LoginButton},
   methods: {
     async login(){
+      
       let {data:res} = await Axios.post("/api/user/login",this.user)
       if (res.code === 1) {
         await window.sessionStorage.setItem('token', res.data.token)
@@ -28,7 +32,6 @@ export default {
       }else {
         await alert(res.msg)
       }
-
         // .then(res => {
         //   window.sessionStorage.setItem('token', res.data.data.token)
         //   this.$router.push("/todo")
